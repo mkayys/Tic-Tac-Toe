@@ -6,5 +6,4 @@ const Game = require('./game.js');
   $(() => {
     let $el = $(".ttt");
     new View(game, $el);
-    
   });

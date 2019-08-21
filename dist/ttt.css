@@ -1,0 +1,24 @@
+ul {
+    display: flex;
+    width: 900px;
+    height: 900px;
+    flex-wrap: wrap;
+    box-sizing: content-box;
+    border: 1px solid black;
+    list-style: none;
+    padding: 0px;
+    margin: 0 auto;
+}
+
+li {
+    width: 300px;
+    box-sizing: border-box;
+    border: 1px solid red;
+    background: gray;
+    height: 300px;
+}
+
+li:hover {
+    background-color: yellow;
+    cursor: pointer;
+}
