@@ -5,7 +5,7 @@ class View {
 
     this.setupBoard();
     this.bindEvents();
-    this.bindEvents = this.bindEvents.bind(this);
+    // this.bindEvents = this.bindEvents.bind(this);
   }
 
   bindEvents() {
@@ -15,12 +15,24 @@ class View {
   }
 
   makeMove($square) {
-    console.log(this.game.playMove($square.data('pos')));
-    if (this.game.playMove($square.data("pos"))){
-      alert('not a valid move!');
-    } else {
-      $square.addClass(this.game.currentPlayer);
+
+    try {
+      this.game.playMove($sqaure.data('pos'));
+    } catch(err) {
+      alert(err.msg);
+      return;
     }
+
+    $square.addClass(this.game.currentPlayer);
+    $sqaure.text(this.game.currentPlayer.toUpperCase());
+
+
+    // if (this.game.playMove($square.data("pos"))){
+    //   alert('not a valid move!');
+    // } else {
+    //   $square.addClass(this.game.currentPlayer);
+    //   $square.text(this.game.currentPlayer.toUpperCase());
+    // }
     // this.game.playMove($square.data("pos"));
   }
 

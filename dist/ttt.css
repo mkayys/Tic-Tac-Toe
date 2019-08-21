@@ -23,14 +23,15 @@ li:hover {
     cursor: pointer;
 }
 
-.x {
+
+.X {
     background: white;
     color: orange;
     font-size: 100px;
     text-align: center;
 }
 
-.o {
+.O {
     background: white;
     color: purple;
     font-size: 100px;
