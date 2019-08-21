@@ -4,13 +4,25 @@ class View {
     this.$el = $el;
 
     this.setupBoard();
+    this.bindEvents();
+    this.bindEvents = this.bindEvents.bind(this);
   }
 
   bindEvents() {
-
+    this.$el.on('click', 'li', (e) => {
+      this.makeMove($(e.currentTarget))
+    });
   }
 
-  makeMove($square) {}
+  makeMove($square) {
+    console.log(this.game.playMove($square.data('pos')));
+    if (this.game.playMove($square.data("pos"))){
+      alert('not a valid move!');
+    } else {
+      $square.addClass(this.game.currentPlayer);
+    }
+    // this.game.playMove($square.data("pos"));
+  }
 
   setupBoard() {
     let $ul = $('<ul>');
@@ -30,8 +42,12 @@ class View {
       }
 
       let yPos = i % 3;
+      // console.log([xPos, yPos]);
+      // $li.data('pos',[ xPos, yPos ]);
 
-      $li.data('pos',[ xPos, yPos ]);
+      $li.data('pos', [xPos, yPos]);
+
+      // $li.click(this.bindEvents);
       $ul.append($li);
     }
 

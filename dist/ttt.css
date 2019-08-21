@@ -22,3 +22,18 @@ li:hover {
     background-color: yellow;
     cursor: pointer;
 }
+
+.x {
+    background: white;
+    color: orange;
+    font-size: 100px;
+    text-align: center;
+}
+
+.o {
+    background: white;
+    color: purple;
+    font-size: 100px;
+    text-align: center;
+
+}

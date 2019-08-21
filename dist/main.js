@@ -115,7 +115,7 @@ eval("const Board = __webpack_require__(/*! ./board */ \"./src/board.js\");\ncon
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const View = __webpack_require__(/*! ./ttt-view.js */ \"./src/ttt-view.js\");\nconst Game = __webpack_require__(/*! ./game.js */ \"./src/game.js\");\n\n  const game = new Game();\n\n  $(() => {\n    let $el = $(\".ttt\");\n    new View(game, $el);\n  });\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const View = __webpack_require__(/*! ./ttt-view.js */ \"./src/ttt-view.js\");\nconst Game = __webpack_require__(/*! ./game.js */ \"./src/game.js\");\n\n  const game = new Game();\n\n  $(() => {\n    let $el = $(\".ttt\");\n    let view = new View(game, $el);\n  });\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
@@ -137,7 +137,7 @@ eval("\nconst MoveError = function (msg) { this.msg = msg; };\n\n// MoveError re
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("class View {\n  constructor(game, $el) {\n    this.game = game;\n    this.$el = $el;\n\n    this.setupBoard();\n  }\n\n  bindEvents() {\n\n  }\n\n  makeMove($square) {}\n\n  setupBoard() {\n    let $ul = $('<ul>');\n\n    this.$el.append($ul);\n\n    for (let i=0; i < 9; i++) {\n      let $li = $('<li>');\n\n      let xPos;\n      if (i < 3) {\n        xPos = 0;\n      } else if ( i >=3 && i < 6 ) {\n        xPos = 1;\n      } else {\n        xPos = 2;\n      }\n\n      let yPos = i % 3;\n\n      $li.data('pos',[ xPos, yPos ]);\n      $ul.append($li);\n    }\n\n  }\n}\n\nmodule.exports = View;\n\n\n//# sourceURL=webpack:///./src/ttt-view.js?");
+eval("class View {\n  constructor(game, $el) {\n    this.game = game;\n    this.$el = $el;\n\n    this.setupBoard();\n    this.bindEvents();\n    this.bindEvents = this.bindEvents.bind(this);\n  }\n\n  bindEvents() {\n    this.$el.on('click', 'li', (e) => {\n      this.makeMove($(e.currentTarget))\n    });\n  }\n\n  makeMove($square) {\n    console.log(this.game.playMove($square.data('pos')));\n    if (this.game.playMove($square.data(\"pos\"))){\n      alert('not a valid move!');\n    } else {\n      $square.addClass(this.game.currentPlayer);\n    }\n    // this.game.playMove($square.data(\"pos\"));\n  }\n\n  setupBoard() {\n    let $ul = $('<ul>');\n\n    this.$el.append($ul);\n\n    for (let i=0; i < 9; i++) {\n      let $li = $('<li>');\n\n      let xPos;\n      if (i < 3) {\n        xPos = 0;\n      } else if ( i >=3 && i < 6 ) {\n        xPos = 1;\n      } else {\n        xPos = 2;\n      }\n\n      let yPos = i % 3;\n      // console.log([xPos, yPos]);\n      // $li.data('pos',[ xPos, yPos ]);\n\n      $li.data('pos', [xPos, yPos]);\n\n      // $li.click(this.bindEvents);\n      $ul.append($li);\n    }\n\n  }\n}\n\nmodule.exports = View;\n\n\n//# sourceURL=webpack:///./src/ttt-view.js?");
 
 /***/ })
 
