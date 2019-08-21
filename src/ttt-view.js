@@ -16,15 +16,31 @@ class View {
 
   makeMove($square) {
 
+    let player = this.game.currentPlayer;
+
     try {
-      this.game.playMove($sqaure.data('pos'));
+      this.game.playMove($sqaure.data("pos"));
     } catch(err) {
       alert(err.msg);
       return;
     }
 
-    $square.addClass(this.game.currentPlayer);
-    $sqaure.text(this.game.currentPlayer.toUpperCase());
+    $square.addClass(player);
+    $square.text(player.toUpperCase());
+
+
+    if (this.game.isOver()) {
+      let winner = this.game.winner();
+      if (winner) {
+        alert(`${winner} wins!`)
+        this.$el.off("click");
+      } else {
+        alert("Game Over: it's a draw");
+        this.$el.off("click");
+      }
+
+      location.reload();
+    }
 
 
     // if (this.game.playMove($square.data("pos"))){
